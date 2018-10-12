@@ -1,4 +1,5 @@
 import random
+import numpy as up
 print('Hello World!')
 
 def printMine(who):
