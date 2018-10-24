@@ -10,5 +10,5 @@
     "python.linting.pylintArgs": [
         //"--extension-pkg-whitelist=cv2"
     ],
-    "python.jediEnabled": true
+    "python.jediEnabled": false
 }
