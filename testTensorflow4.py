@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 #增加层函数，输入值，输入值大小，输出值大小，激励函数
 def add_layer(inputs,in_size,out_size,n_layer,activation_function=None):
     layer_name = 'layer%s'%n_layer
-    with tf.name_scope('layer'):
+    with tf.name_scope(layer_name):
         with tf.name_scope('weights'):
             Weights = tf.Variable(tf.random_normal([in_size,out_size]))
             tf.summary.histogram(layer_name + '/weight',Weights)
@@ -70,15 +70,19 @@ plt.show()
 for i in range(2000):
     session.run(train_step,feed_dict={xs:x_data,ys:y_data})
     if i%50==0:
-        #try:
-        #    ax.lines.remove(lines[0])
-        #except Exception:
-        #    pass
+        try:
+            ax.lines.remove(lines[0])
+        except Exception:
+            pass
         prediction_value = session.run(merged,feed_dict={xs:x_data, ys: y_data})
         writer.add_summary(prediction_value, i)
+        
         # show the prediction
-        #lines= ax.plot(x_data,prediction_value,'r-',lw=5)
-        #plt.pause(1)
+        prediction_value_list = session.run(prediction,feed_dict={xs:x_data})
+        lines= ax.plot(x_data,prediction_value_list,'r-',lw=5)
 
+        plt.pause(1)
+
+        
 #terminal command 搭建图纸
 #tensorboard --logdir logs
