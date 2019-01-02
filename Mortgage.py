@@ -51,3 +51,19 @@ class TowRate(Mortgage):
             self.payment = findPayment(self.outstanding[-1],self.rate,self.months-self.teaserMonths)
         Mortgage.makePayment(self)
 
+class MathRate(Mortgage):
+    def __init__(self, loan, fee, months):
+        self.months = months
+        self.loan = loan
+        self.fee = fee
+    def getRate(self):
+        P = self.loan - self.fee
+        A = self.loan/self.months
+        n = self.months
+        #Pni +Pn *i^2- Ani = An-A
+        return (P*n ,P*n-A*n,A*n-A)
+
+mr = MathRate(100000,2000,12)
+print(mr.getRate())
+
+
