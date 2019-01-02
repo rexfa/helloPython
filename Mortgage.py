@@ -1,3 +1,4 @@
+import math
 def findPayment(loan,r,m):
     return loan*((r*(1+r)**m)/((r+1)**m-1))
 
@@ -61,9 +62,20 @@ class MathRate(Mortgage):
         A = self.loan/self.months
         n = self.months
         #Pni +Pn *i^2- Ani = An-A
-        return (P*n ,P*n-A*n,A*n-A)
+        a = P*n
+        b = P*n-A*n
+        c= A-A*n
+        aRoot = math.sqrt(a)
+        i = b/(2*aRoot)
+        cc = i*i-c
+        ccRoot = math.sqrt(cc)
+        r= (ccRoot- i)/aRoot
+        #解一个二元一次方程组获取正实数解，就是年利率
+        return (r)
 
 mr = MathRate(100000,2000,12)
 print(mr.getRate())
+mr2 = MathRate(100000,200,12)
+print(mr2.getRate())
 
 
