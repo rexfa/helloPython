@@ -50,7 +50,7 @@ class TowRate(Mortgage):
             self.rate = self.nextRate
             self.payment = findPayment(self.outstanding[-1],self.rate,self.months-self.teaserMonths)
         Mortgage.makePayment(self)
-
+#Ｐ＝Ａ〔（1＋i）n－１〕／〔i（1＋i）n〕 Ｐ為代款金額，Ａ為每期償還金額，i為每期利率，n為期數
 class MathRate(Mortgage):
     def __init__(self, loan, fee, months):
         self.months = months
