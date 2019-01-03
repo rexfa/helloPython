@@ -72,10 +72,26 @@ class MathRate(Mortgage):
         r= (ccRoot- i)/aRoot
         #解一个二元一次方程组获取正实数解，就是年利率
         return (r)
+#MathRate 公式不是很理解
+#用下面这个年化利率公式算出这个在有费的无息贷款中实际年化利率是
+# PA=   P'/（（1+n/2）/12） 
+# PA是年化实际利率 P'是名义年利率，就是费用处以贷款总额
+# n是还款期数，式子中的12是一年12个月
+class ActualInterestRateCalculation(Mortgage):
+    def __init__(self, loan, fee, months):
+        self.months = months
+        self.loan = loan
+        self.fee = fee
+    def getRat(self):
+        PA = (self.fee/self.loan)/(((self.months+1)/2)/12)
+        return PA
 
 mr = MathRate(100000,2000,12)
 print(mr.getRate())
-mr2 = MathRate(100000,200,12)
-print(mr2.getRate())
-
+#mr2 = MathRate(100000,200,12)
+#print(mr2.getRate())
+ac = ActualInterestRateCalculation(100000,2000,12)
+print (ac.getRat())
+ac2 = ActualInterestRateCalculation(100000,200,12)
+print (ac2.getRat())
 
