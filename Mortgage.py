@@ -94,4 +94,3 @@ ac = ActualInterestRateCalculation(100000,2000,12)
 print (ac.getRat())
 ac2 = ActualInterestRateCalculation(100000,200,12)
 print (ac2.getRat())
-
